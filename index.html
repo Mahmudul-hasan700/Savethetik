@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiktok downloader - without watermark</title>
+  <link rel="icon" href="favicon.png" sizes="any">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="main.css" />
+
+  </style>
+</head>
+
+<body id="body" class="body">
+  <script>
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme == "dark") {
+      document.body.classList.toggle("dark-theme");
+    } else if (currentTheme == "light") {
+      document.body.classList.toggle("light-theme");
+    }
+  </script>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="navbar-left">
+          <a class="navbar-brand" href="/">Snap<span>Tik</span></a>
+          <a class="navbar-app" href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_316_48)">
+                <path
+                  d="M10.6666 0.666656H5.33325C4.22659 0.666656 3.33325 1.55999 3.33325 2.66666V13.3333C3.33325 14.44 4.22659 15.3333 5.33325 15.3333H10.6666C11.7733 15.3333 12.6666 14.44 12.6666 13.3333V2.66666C12.6666 1.55999 11.7733 0.666656 10.6666 0.666656ZM11.3333 12H4.66659V2.66666H11.3333V12ZM9.33325 14H6.66659V13.3333H9.33325V14Z"
+                  fill="#112DDD" />
+              </g>
+              <defs>
+                <clipPath id="clip0_316_48">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>Install App</a>
+        </div>
+        <div class="navbar-right">
+          <div class="nav-item dropdown">
+            <button class="reset-button navbar-btn btn-darkmode" type="button" role="button">
+              <i class="icon navbar-darkmode"></i>
+            </button>
+            <button class="reset-button navbar-btn navbar-lang" type="button"
+              onclick="toggleLang()"><span>Languages</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1_714)">
+                  <path
+                    d="M10 18.3333C14.6024 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6024 1.66667 10 1.66667C5.39763 1.66667 1.66667 5.39763 1.66667 10C1.66667 14.6024 5.39763 18.3333 10 18.3333Z"
+                    stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M1.66667 10H18.3333" stroke="black" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path
+                    d="M10 1.66667C12.0844 3.94863 13.269 6.91003 13.3333 10C13.269 13.09 12.0844 16.0514 10 18.3333C7.9156 16.0514 6.73104 13.09 6.66667 10C6.73104 6.91003 7.9156 3.94863 10 1.66667V1.66667Z"
+                    stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1_714">
+                    <rect width="20" height="20" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg></button>
+            <ul class="dropdown-menu dropdown-lang">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">Việt Nam</a></li>
+              <li><a class="dropdown-item" href="#">Indonesia</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <div class="hero">
+      <div class="container">
+        <div class="hero-title">
+          <h1 class="hero-h1">Tiktok Video Download</h1>
+          <h2 class="hero-h2">Without Watermark. Fast. All devices</h2>
+        </div>
+        <div class="hero-form">
+          <form method="get" class="flex flex-col px-2 py-4">
+            <div class="hero-input">
+              <div class="alert alert-warning" role="alert" id="alert"></div>
+              <div class="progress-box">
+                <div class="progress-text">Please wait a moment <div class="spinner-grow text-light" role="status"><span
+                      class="visually-hidden">Loading...</span></div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-label="Success example"
+                    style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="hero-input-left">
+                <div class="icon-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12.317 3.0441C13.598 1.76308 15.675 1.76308 16.956 3.0441C18.237 4.32511 18.237 6.40205 16.956 7.68306L13.9331 10.7059C12.6521 11.9869 10.5752 11.9869 9.29416 10.7059C9.19999 10.6117 9.11291 10.5135 9.03283 10.4118C8.81933 10.1405 8.42638 10.0937 8.15515 10.3072C7.88392 10.5207 7.83713 10.9137 8.05063 11.1849C8.1612 11.3254 8.2811 11.4606 8.41028 11.5898C10.1794 13.359 13.0478 13.359 14.817 11.5898L17.8399 8.56694C19.609 6.79777 19.609 3.92938 17.8399 2.16021C16.0707 0.391044 13.2023 0.391043 11.4331 2.16021L8.93309 4.66024C8.68902 4.90432 8.68902 5.30005 8.93309 5.54413C9.17717 5.78821 9.5729 5.78821 9.81698 5.54413L12.317 3.0441Z"
+                      fill="#C6C6D5" />
+                    <path
+                      d="M6.06698 9.2941C7.348 8.01308 9.42493 8.01308 10.7059 9.2941C10.8002 9.38831 10.8872 9.48655 10.9673 9.58821C11.1808 9.85944 11.5737 9.90623 11.845 9.69272C12.1162 9.47922 12.163 9.08627 11.9495 8.81504C11.8389 8.67454 11.7189 8.53933 11.5898 8.41021C9.82066 6.64104 6.95227 6.64104 5.1831 8.41021L2.16025 11.4331C0.391082 13.2022 0.391082 16.0706 2.16025 17.8398C3.92942 19.609 6.79781 19.609 8.56698 17.8398L11.067 15.3398C11.3111 15.0957 11.3111 14.7 11.067 14.4559C10.8229 14.2118 10.4272 14.2118 10.1831 14.4559L7.6831 16.9559C6.40208 18.2369 4.32515 18.2369 3.04413 16.9559C1.76312 15.6749 1.76312 13.598 3.04413 12.3169L6.06698 9.2941Z"
+                      fill="#C6C6D5" />
+                    <path
+                      d="M12.317 3.0441C13.598 1.76308 15.675 1.76308 16.956 3.0441C18.237 4.32511 18.237 6.40205 16.956 7.68306L13.9331 10.7059C12.6521 11.9869 10.5752 11.9869 9.29416 10.7059C9.19999 10.6117 9.11291 10.5135 9.03283 10.4118C8.81933 10.1405 8.42638 10.0937 8.15515 10.3072C7.88392 10.5207 7.83713 10.9137 8.05063 11.1849C8.1612 11.3254 8.2811 11.4606 8.41028 11.5898C10.1794 13.359 13.0478 13.359 14.817 11.5898L17.8399 8.56694C19.609 6.79777 19.609 3.92938 17.8399 2.16021C16.0707 0.391044 13.2023 0.391043 11.4331 2.16021L8.93309 4.66024C8.68902 4.90432 8.68902 5.30005 8.93309 5.54413C9.17717 5.78821 9.5729 5.78821 9.81698 5.54413L12.317 3.0441Z"
+                      stroke="#C6C6D5" stroke-width="0.6" stroke-linecap="round" />
+                    <path
+                      d="M6.06698 9.2941C7.348 8.01308 9.42493 8.01308 10.7059 9.2941C10.8002 9.38831 10.8872 9.48655 10.9673 9.58821C11.1808 9.85944 11.5737 9.90623 11.845 9.69272C12.1162 9.47922 12.163 9.08627 11.9495 8.81504C11.8389 8.67454 11.7189 8.53933 11.5898 8.41021C9.82066 6.64104 6.95227 6.64104 5.1831 8.41021L2.16025 11.4331C0.391082 13.2022 0.391082 16.0706 2.16025 17.8398C3.92942 19.609 6.79781 19.609 8.56698 17.8398L11.067 15.3398C11.3111 15.0957 11.3111 14.7 11.067 14.4559C10.8229 14.2118 10.4272 14.2118 10.1831 14.4559L7.6831 16.9559C6.40208 18.2369 4.32515 18.2369 3.04413 16.9559C1.76312 15.6749 1.76312 13.598 3.04413 12.3169L6.06698 9.2941Z"
+                      stroke="#C6C6D5" stroke-width="0.6" stroke-linecap="round" />
+                  </svg></div>
+                <input name="url" id="url" type="text" class="form-control" value=""
+                  placeholder="Place TikTok video URL here" required="" aria-label="Name" autocomplete="off"
+                  autocapitalize="none">
+                <div class="paste"><button type="button" class="btn btn-paste"><i
+                      class="icon icon-paste"></i><span>Paste</span></button></div>
+              </div>
+              <div class="hero-input-right"><button type="submit" class="btn btn-go flex-center"><i
+                    class="icon icon-download"></i>Download</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="ad-box">
+      <div class="container">
+        <div class="ad-container"></div>
+      </div>
+    </div>
+    <div id="container" class="hidden container mx-auto h-full flex flex-col space-y-9">
+      <div class="mt-8 h-full px-2 flex flex-col space-y-6 pb-6 md:flex-row md:justify-center md:space-x-12">
+
+        <!-- VIDEO -->
+
+        <div id="video_container" class="w-full md:w-1/2 h-1/2 md:h-3/4 rounded-lg bg-neutral-600">
+
+          <video controls="" class="rounded-lg h-full w-full" poster="" style="background-image:url(pattern.png);">
+            <source id="video_source" src="">
+          </video>
+
+        </div>
+
+        <div class="md:flex md:flex-col md:space-y-8">
+
+          <!-- CARD -->
+
+          <div
+            class="dark:bg-neutral-600 bg-sky-700 md:bg-transparent dark:md:bg-transparent w-full rounded-lg flex flex-col px-2 pb-4 pt-2 space-y-3">
+
+            <!-- USER -->
+
+            <div
+              class="w-full h-16 flex justify-between items-center space-x-2 px-2 dark:bg-neutral-400 dark:md:bg-sky-100 bg-sky-700 rounded-lg">
+
+              <div><img id="author_avatar" class="w-10 h-10 rounded-lg" src=""></div>
+
+              <div class="flex flex-col justify-start items-start flex-grow">
+
+                <div id="author_name" class="font-bold -mt-1 dark:text-black text-white"></div>
+
+                <div id="author_username" class="-mt-1 dark:text-black text-white"></div>
+
+              </div><a id="author_videos" class="clear_css" target="_blank" href="">
+
+                <div
+                  class="h-10 flex justify-center items-center p-2 rounded-lg dark:bg-neutral-600 bg-sky-100 hover:bg-white dark:hover:bg-neutral-700 transition-colors dark:text-white">
+
+                  More Videos <svg class="ml-2" width="24" height="24" viewbox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path class="stroke-sky-500"
+                      d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+
+                </div>
+              </a>
+
+            </div><!-- Buttons -->
+
+            <div class="flex items-center space-x-3 md:flex-col md:space-x-0 md:space-y-3 w-full">
+
+              <div onclick="handleDownloadButtonClick(this)" key="video" id="video_download"
+                class="relative w-full flex flex-col justify-center items-center py-1 rounded-lg bg-sky-300 hover:bg-sky-200 transition-colors cursor-pointer">
+
+                <div class="button-content flex flex-col justify-center items-center py-1">
+
+                  <span class="font-semibold text-lg text-neutral-800">Download</span>
+
+                  <span class="text-xs whitespace-nowrap text-neutral-600 -mt-1">Without
+
+                    Watermark</span>
+
+                </div><svg class="dots hidden absolute left-0 right-0 mx-auto h-3/4" id="loader" viewbox="0 0 132 58"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+                  <g class="fill-neutral-800" id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd"
+                    sketch:type="MSPage">
+
+                    <g sketch:type="MSArtboardGroup">
+
+                      <circle id="dot1" sketch:type="MSShapeGroup" cx="25" cy="30" r="13"></circle>
+
+                      <circle id="dot2" sketch:type="MSShapeGroup" cx="65" cy="30" r="13"></circle>
+
+                      <circle id="dot3" sketch:type="MSShapeGroup" cx="105" cy="30" r="13"></circle>
+
+                    </g>
+
+                  </g>
+                </svg>
+
+              </div>
+
+              <div onclick="handleDownloadButtonClick(this)" key="video_wm" id="video_download_wm"
+                class="relative w-full flex flex-col justify-center items-center py-1 rounded-lg bg-sky-300 hover:bg-sky-200 transition-colors cursor-pointer">
+
+                <div class="button-content flex flex-col justify-center items-center py-1">
+
+                  <span class="font-semibold text-lg text-neutral-800">Download</span>
+
+                  <span class="text-xs whitespace-nowrap text-neutral-600 -mt-1">With
+
+                    Watermark</span>
+
+                </div><svg class="dots hidden absolute left-0 right-0 mx-auto h-3/4" id="loader" viewbox="0 0 132 58"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+                  <g class="fill-neutral-800" id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd"
+                    sketch:type="MSPage">
+
+                    <g sketch:type="MSArtboardGroup">
+
+                      <circle id="dot1" sketch:type="MSShapeGroup" cx="25" cy="30" r="13"></circle>
+
+                      <circle id="dot2" sketch:type="MSShapeGroup" cx="65" cy="30" r="13"></circle>
+
+                      <circle id="dot3" sketch:type="MSShapeGroup" cx="105" cy="30" r="13"></circle>
+
+                    </g>
+
+                  </g>
+                </svg>
+
+              </div>
+
+            </div>
+            <div
+              class="dark:bg-sky-100 bg-sky-900 w-full h-16 rounded-lg flex p-2 justify-between items-center space-x-2">
+
+              <div><img id="music_cover" class="w-10 h-10 rounded-lg" src=""></div>
+
+              <div class="flec flex-col justify-start items-start flex-grow overflow-hidden">
+
+                <div id="music_title" class="font-bold -mt-1 dark:text-black text-white whitespace-nowrap">
+
+                </div>
+
+                <div id="music_author" class="-mt-1 dark:text-black text-white whitespace-nowrap">
+
+                </div>
+
+              </div>
+
+              <div onclick="handleDownloadButtonClick(this)" key="music" id="music_download"
+                class="relative w-10 h-10 flex justify-center items-center p-2 rounded-lg dark:bg-sky-400 dark:hover:bg-sky-300 bg-sky-100 hover:bg-white">
+
+                <svg class="button-content" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 277.425 277.425"
+                  style="enable-background:new 0 0 277.425 277.425;" xml:space="preserve">
+
+                  <path class="fill-sky-800" style="fill-rule:evenodd;clip-rule:evenodd;"
+                    d="M266.142,136.6c-8.759-38.884-44.033-105.278-123.225-105.278c-0.695,0-1.361,0.112-2.028,0.217c-0.666-0.104-1.33-0.216-2.023-0.216c-79.47,0-115.358,63.17-120.335,101.096C7.617,136.956,0,147.11,0,158.933v58.113c0,16.047,14.01,29.057,31.292,29.057H54.76c4.325,0,7.823-3.249,7.823-7.265V137.141c0-4.016-3.498-7.265-7.823-7.265h-9.87c3.523-12.281,10.836-29.112,24.414-43.323c3.158,3.908,7.131,7.414,11.239,7.414c9.282,0,24.908-17.817,58.183-17.817c33.277,0,48.873,17.817,58.156,17.817c4.1,0,8.068-3.493,11.223-7.392c14.461,14.158,23.291,30.934,27.808,43.302h-13.248c-4.324,0-7.824,3.249-7.824,7.265v101.697c0,4.016,3.5,7.265,7.824,7.265h23.468c17.281,0,31.292-13.01,31.292-29.057v-58.113C277.425,149.954,273.034,141.93,266.142,136.6z M173.886,169.418l-21.857,21.803v-56.983c0-7.414-6.024-13.424-13.456-13.424c-7.432,0-13.457,6.01-13.457,13.424v56.983l-21.856-21.803c-5.205-5.194-13.647-5.194-18.853,0c-5.207,5.193-5.207,13.614,0,18.807l42.881,42.779c2.398,3.694,6.545,6.15,11.285,6.15c4.739,0,8.887-2.456,11.284-6.15l42.881-42.779c5.207-5.193,5.207-13.614,0-18.807C187.532,164.224,179.092,164.224,173.886,169.418z">
+
+                  </path>
+                </svg> <svg class="hidden animate-spin absolute left-0 right-0 mx-auto w-6 h-6" id="loader"
+                  viewbox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                  <path class="fill-neutral-800" d="M15 8c0 3.9-3.1 7-7 7s-7-3-7-7h-1c0 4 3.6 8 8 8s8-3.6 8-8h-1z">
+
+                  </path>
+                </svg>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div id="overlay_loader" class="overlay hidden bg-neutral-100 dark:bg-neutral-800">
+        <div class="overlay__inner">
+          <div class="overlay__content"><span
+              class="spinner dark:border-t-white dark:border-neutral-700 border-neutral-200 border-t-neutral-900"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="h3"></div>
+            <div class="iconapp-box flex-center">
+              <i class=""></i>
+            </div>
+
+            <h3 class="h3">Download TikTok videos (Musically) Without Watermark for FREE</h3>
+            <p>SnapTik.App is one of the best TikTok Downloader available online to download video tiktok without a
+              watermark. You are not required to install any software on your computer or mobile phone, all that you
+              need is a TikTok video link, and all the processing is done on our side so you can be one click away from
+              downloading videos to your devices.</p>
+            <p>I now provide an app for downloading TikTok videos. It is fast, easy, with no watermark and HD quality
+            </p>
+
+            <h4 class="h4 mt-3">Key features:</h4>
+            <ul>
+              <li>No watermark for better quality, which most of the tools out there can't.</li>
+              <li>Download TikTok videos, Musically videos on any devices that you want: mobile, PC, or tablet. TikTok
+                only allows users to download videos by its application and downloaded videos contain the watermark.
+              </li>
+              <li>Download by using your browsers: I want to keep things simple for you. No need to download or install
+                any software. I make an application for this purpose as well but you can only install whenever you like.
+              </li>
+              <li>It's always free. I only place some ads, which support maintaining our services, and further
+                development.</li>
+            </ul>
+            <div class="faqbox" id="howto" itemscope="" itemtype="https://schema.org/FAQPage">
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 id="howto" class="h3" itemprop="name">How to Download video Tiktok no watermark?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <ul class="ol-decorated" itemprop="text">
+                    <li>Open Tik Tok app on your phone/or Web on your browser.</li>
+                    <li>Choose whatever video you want to download.</li>
+                    <li>Click to the <span class="btn-click">Share</span> button at the right bottom. </li>
+                    <li>Click the <span class="btn-click">Copy Link</span> button. </li>
+                    <li>Download by using your browsers: I want to keep things simple for you. No need to download or
+                      install any software. I make an application for this purpose as well but you can only install
+                      whenever you like.</li>
+                    <li>Go back to SnapTik.App and paste your download link to the field above then click to the <span
+                        class="btn-click">Download</span> button. </li>
+                    <li>Wait for our server to do its job and then, save the video to your device.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">How to get the TikTok video download link?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <div itemprop="text">
+                    <ul class="ol-decorated">
+                      <li>Open your TikTok application</li>
+                      <li>Choose the TikTok video that you want to download</li>
+                      <li>Click Share and at the <span class="btn-click">Share</span> options, find <span
+                          class="btn-click">Copy Link</span> button </li>
+                      <li>Your download URL is ready on the clipboard.</li>
+                    </ul>
+
+                    <div class="example">
+                      <b>For example, the link would look like this:</b>
+                      <div class="link-example">https://v.douyin.com/3vn57r/</div>
+                      or
+                      <div class="link-example">https://www.tiktok.com/@philandmore/video/6805867805452324102</div>
+                      or
+                      <div class="link-example">https://m.tiktok.com/v/6805867805452324102.html</div>
+                      and more...
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">Where are TikTok videos saved after being downloaded?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">When you're downloading files, they are usually saved into whatever folder you have
+                    set as your default. Your browser normally sets this folder for you. In browser settings, you can
+                    change and choose manually the destination folder for your downloaded TikTok videos.</p>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">Does SnapTik.App store downloaded videos or keep a copy of videos?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">SnapTik.App doesn't store videos, neither do i keep copies of downloaded videos.
+                    All videos are hosted on TikTok's servers. Also, i don't keep track of the download histories of our
+                    users, thus making using SnapTik.App totally anonymous.</p>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">Do I need to install instructions or extensions?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">No. I try to keep things easy for our users. All you need is your TikTok download
+                    video links. That's it.</p>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">Do I have to pay to Tiktok Downloader without watermark (Snaptik)?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">No, you don't have to pay for anything because our software is always free. You can
+                    support us by turning off your Ad Blocks or making donations. It supports our further development.
+                  </p>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">Can I use this Tiktok video downloader on my Android phone?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">Yes, it’s better to use SnapTik to save no-watermark TikTok videos on your Android
+                    phone. SnapTik is super FAST, 100% FREE, and getting updated frequently.</p>
+                </div>
+              </div>
+              <div class="faq_item" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
+                <h3 class="h3" itemprop="name">How do I save tiktok video /download my favorite Tik Tok mp4 videos to my
+                  iPhone (IOS)?</h3>
+                <div itemprop="acceptedAnswer" itemscope="" itemtype="https://schema.org/Answer">
+                  <p itemprop="text">Because of Apple security policy, you can't normally download any videos Mp4
+                    tiktok, music (Mp3), or movies to your iPhone just like you can do it with Android phones. But there
+                    are some methods to deal with it, please follow this introduction <a id="click_hd_iphone"
+                      target="_blank" rel="nofollow"
+                      href="https://snaptik.app/landing/how-to-download-tik-tok-video-without-watermark-on-iphones">how
+                      to download TikTok video with your iPhone</a>. </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="container">
+        <div class="column is-12">
+          <h1>Contact</h1>
+          <form action="" method="POST">
+            <div class="mb-3">
+              <label for="your-name" class="form-label">Your Name</label>
+              <input type="text" name="your-name" class="form-control" id="your-name" placeholder="Your Name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Your Email</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Message</label>
+              <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <div class="g-recaptcha" data-sitekey="6LdwkbAaAAAAANpTfeePVXiEGZWpuzNBxPvW_ryt">
+                <div style="width: 304px; height: 78px;">
+                  <div><iframe title="reCAPTCHA"
+                      src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LdwkbAaAAAAANpTfeePVXiEGZWpuzNBxPvW_ryt&amp;co=aHR0cHM6Ly9zbmFwdGlrLmFwcDo0NDM.&amp;hl=en&amp;v=vP4jQKq0YJFzU6e21-BGy3GP&amp;size=normal&amp;cb=17lffqb3q6g2"
+                      width="304" height="78" role="presentation" name="a-663n35andsys" frameborder="0" scrolling="no"
+                      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                  </div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response"
+                    style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                </div><iframe style="display: none;"></iframe>
+              </div>
+            </div>
+            <button type="submit" name="btn-send" value="submit" class="btn btn-primary">Send</button>
+          </form>
+          <p>We are here to answer any questions or inquiries that you may have. Reach out to us and we will respond as
+            soon as possible. In the mean time please have a look at our <a href="/landing/terms-of-service">terms of
+              service</a>.</p>
+          <p><br></p>
+          <p><span style="font-size: 18px;">Follow us:</span></p>
+          <ul>
+            <li><a href="https://www.youtube.com/channel/UCG4kMD1fh35T4QrpydSJAjA" rel="noopener noreferrer"
+                target="_blank">Youtube</a></li>
+          </ul>
+          <p>Email: <a href="mailto:downloadtiktokvideo@gmail.com">contact@snaptik.com</a></p>
+          trang chinh
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="copyright">
+      <div class="container">
+        <div class="copyright-link">
+          <ul class="list-unstyled">
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="terms-of-use.html">Terms of Service</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="copyright-text">© 2019 - 2022 <a href="https://snaptik.app" title="SnapTik">SnapTik</a>. All rights
+          reserved.</div>
+
+      </div>
+    </div>
+  </footer>
+  <div class="ad-sticky only-mobile" id="ad-sticky">
+    <div class="ad-item">
+      <div class="ad-sticky-ins"></div>
+      <div class="ad-close" onclick="document.getElementById('ad-sticky').remove()"><svg width="22px" height="22px"
+          viewBox="0 0 16 16" fill="#000" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+          </path>
+        </svg></div>
+    </div>
+  </div>
+  <div class="modal-down" id="ad-modal">
+    <div class="modal-background"></div>
+    <div class="modal-container">
+      <div class="container modal-box">
+        <!-- <div class="notification is-success mb-3">$lang['download_begin_automatically']</div> -->
+        <div class="ads-content" id="ads-content"></div>
+        <button class="btn btn-modal-close" aria-label="close">Close</button>
+      </div>
+    </div>
+    <button class="modal-close" aria-label="close"></button>
+  </div>
+  <div id="js-result"></div>
+  <button class="btn share-button" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+      viewBox="0 0 512 512">
+      <path
+        d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z" />
+    </svg></button>
+  <script src="script.js">
+
+  </script>
+
+  <script>
+    const lang = {currentLang: "en", paste: "Paste", clear: "Clear", linkEmpty: "Link is empty."};
+  </script>
+  <script src="jquery.js"></script>
+  <script>
+    function insertAndExecute(id, text) {
+      domelement = document.getElementById(id);
+      domelement.innerHTML = text;
+      var scripts = [];
+
+      ret = domelement.childNodes;
+      for (var i = 0; ret[i]; i++) {
+        if (scripts && nodeName(ret[i], "script") && (!ret[i].type || ret[i].type.toLowerCase() === "text/javascript")) {
+          scripts.push(ret[i].parentNode ? ret[i].parentNode.removeChild(ret[i]) : ret[i]);
+        }
+      }
+
+      for (script in scripts) {
+        evalScript(scripts[script]);
+      }
+    }
+    function nodeName(elem, name) {
+      return elem.nodeName && elem.nodeName.toUpperCase() === name.toUpperCase();
+    }
+    function evalScript(elem) {
+      data = (elem.text || elem.textContent || elem.innerHTML || "");
+
+      var head = document.getElementsByTagName("head")[0] || document.documentElement,
+        script = document.createElement("script");
+      script.type = "text/javascript";
+      script.appendChild(document.createTextNode(data));
+      head.insertBefore(script, head.firstChild);
+      head.removeChild(script);
+
+      if (elem.parentNode) {
+        elem.parentNode.removeChild(elem);
+      }
+    }
+
+    var form = document.forms.namedItem("formurl");
+    var progress = document.querySelector(".progress-box");
+    var alert = document.querySelector("#alert");
+
+    form.addEventListener('submit', function (ev) {
+
+      sendEvent('Get_video');
+      var oData = new FormData(form);
+      progress.classList.add('active');
+      var oReq = new XMLHttpRequest();
+      oReq.open("POST", "abc.php", true);
+      oReq.onload = function (oEvent) {
+        if (oReq.status == 200) {
+          insertAndExecute("js-result", "<scri" + "pt type='text/javascript'>" + oReq.response + "</scr" + "ipt>");
+        } else {
+          alert.innerHTML = "Error " + oReq.status + " something went wrong.";
+          sendEvent("Error " + oReq.status);
+        }
+      };
+
+      oReq.send(oData);
+      ev.preventDefault();
+    }, false);
+  </script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-162798444-8', 'auto');
+    ga('send', 'pageview');
+    function sendEvent(e, n = "") {"" == n ? ga("send", "event", "home", e) : ga("send", "event", "home", e, n)}
+  </script>
+
+</body>
+
+                      </html>

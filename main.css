@@ -795,7 +795,9 @@ video {
 
   .dark\:bg-neutral-600 {
     --tw-bg-opacity: 1;
-    background-color: rgb(82 82 82 / var(--tw-bg-opacity));
+    background-color: #363f50;
+    backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
   }
 
   .dark\:bg-neutral-400 {

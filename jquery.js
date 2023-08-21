@@ -1,10 +1,3 @@
-const toggleSwitch = document.querySelector(".btn-darkmode");
-toggleSwitch.addEventListener("click", function() {
-  document.body.classList.toggle("dark-theme");
-  var e = document.body.classList.contains("dark-theme") ? "dark" : "light";
-  localStorage.setItem("theme", e);
-});
-
 const btnPaste = document.querySelector(".btn-paste");
 const inputUrl = document.getElementById("url");
 
@@ -16,8 +9,6 @@ btnPaste.addEventListener("click", function() {
       });
 });
 
-navigator.clipboard && (btnPaste.style.display = "flex");
-
 inputUrl.addEventListener("keyup", function(e) {
   inputUrl.value.length > 0 && showBtnClear();
   hideAlert();
@@ -25,15 +16,30 @@ inputUrl.addEventListener("keyup", function(e) {
 
 const alertEL = document.getElementById("alert");
 
-const shareButton = document.querySelector(".share-button");
-shareButton.addEventListener("click", e => {
-  navigator.share
-    ? navigator.share({
-        title: "Share SnapTik",
-        url: "https://snaptik.app/" + lang.currentLang
-      }).then(() => {
-        sendEvent("Share_sucs_by_webapi");
-      }).catch(console.error)
-    : sendEvent("Share_webapi_not_support");
-  sendEvent("share_click_btnShare");
+(document.querySelectorAll(".modal-background, .modal-close, .btn-modal-close") || []).forEach(e => {
+  let t = e.closest(".modal-down");
+  e.addEventListener("click", () => {
+    closeModal(t);
+  });
+});
+
+document.addEventListener("keydown", e => {
+  27 === (e || window.event).keyCode && closeAllModals();
+});
+
+const showBtnClear = () => {
+  btnPaste.classList.add("active");
+  document.querySelector(".btn-paste span").innerHTML = lang.clear;
+};
+
+const hideAlert = () => {
+  alertEL.classList.remove("active");
+  alertEL.innerHTML = "";
+};
+
+const toggleSwitch = document.querySelector(".btn-darkmode");
+toggleSwitch.addEventListener("click", function() {
+  document.body.classList.toggle("dark-theme");
+  var e = document.body.classList.contains("dark-theme") ? "dark" : "light";
+  localStorage.setItem("theme", e);
 });

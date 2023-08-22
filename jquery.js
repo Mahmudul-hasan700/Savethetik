@@ -109,7 +109,7 @@ const alertEL = document.getElementById("alert"),
 
 shareButton.addEventListener("click", e => {
   if (navigator.share) {
-    navigator.share({ title: "Share SnapTik", url: "https://snaptik.app/" + lang.currentLang }).then(() => {
+    navigator.share({ title: "Share Tikmate", url: "https://tikmate.netlify.app/" + lang.currentLang }).then(() => {
       sendEvent("Share_sucs_by_webapi");
     }).catch(console.error);
   } else {

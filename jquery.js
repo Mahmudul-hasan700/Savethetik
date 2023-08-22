@@ -29,7 +29,7 @@ function showAd(e, t) {
   0 == n.length && iOS() && t.preventDefault();
   t.stopPropagation();
   openModal(document.getElementById("ad-modal"));
-  document.getElementById("ads-content").innerHTML = '<ins class="adsbygoogle" style="display:block; margin: 0 auto;" data-ad-client="ca-pub-2496545456108734" data-ad-slot="8422982901" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+  document.getElementById("ads-content").innerHTML = '<ins class="adsbygoogle" style="display:block; margin: 0 auto;" data-ad-client="ca-pub-2789798353616203" data-ad-slot="8422982901" data-ad-format="auto" data-full-width-responsive="true"></ins>';
   (adsbygoogle = window.adsbygoogle || []).push({});
   0 == n.length && iOS() && setTimeout(function() {
     null != e.getAttribute("href") ? window.location.href = e.getAttribute("href") : sendEvent("Error_Link_Null");

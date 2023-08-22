@@ -438,8 +438,8 @@
         <div class="copyright-link">
           <ul class="list-unstyled">
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="terms-of-use.html">Terms of Service</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
           </ul>
         </div>
         <div class="copyright-text">© 2019 - 2022 <a href="https://snaptik.app" title="SnapTik">SnapTik</a>. All rights
@@ -491,65 +491,7 @@ window.onload = function() {
     const lang = {currentLang: "en", paste: "Paste", clear: "Clear", linkEmpty: "Link is empty."};
   </script>
   <script src="jquery.js"></script>
-  <script>
-    function insertAndExecute(id, text) {
-      domelement = document.getElementById(id);
-      domelement.innerHTML = text;
-      var scripts = [];
-
-      ret = domelement.childNodes;
-      for (var i = 0; ret[i]; i++) {
-        if (scripts && nodeName(ret[i], "script") && (!ret[i].type || ret[i].type.toLowerCase() === "text/javascript")) {
-          scripts.push(ret[i].parentNode ? ret[i].parentNode.removeChild(ret[i]) : ret[i]);
-        }
-      }
-
-      for (script in scripts) {
-        evalScript(scripts[script]);
-      }
-    }
-    function nodeName(elem, name) {
-      return elem.nodeName && elem.nodeName.toUpperCase() === name.toUpperCase();
-    }
-    function evalScript(elem) {
-      data = (elem.text || elem.textContent || elem.innerHTML || "");
-
-      var head = document.getElementsByTagName("head")[0] || document.documentElement,
-        script = document.createElement("script");
-      script.type = "text/javascript";
-      script.appendChild(document.createTextNode(data));
-      head.insertBefore(script, head.firstChild);
-      head.removeChild(script);
-
-      if (elem.parentNode) {
-        elem.parentNode.removeChild(elem);
-      }
-    }
-
-    var form = document.forms.namedItem("formurl");
-    var progress = document.querySelector(".progress-box");
-    var alert = document.querySelector("#alert");
-
-    form.addEventListener('submit', function (ev) {
-
-      sendEvent('Get_video');
-      var oData = new FormData(form);
-      progress.classList.add('active');
-      var oReq = new XMLHttpRequest();
-      oReq.open("POST", "abc.php", true);
-      oReq.onload = function (oEvent) {
-        if (oReq.status == 200) {
-          insertAndExecute("js-result", "<scri" + "pt type='text/javascript'>" + oReq.response + "</scr" + "ipt>");
-        } else {
-          alert.innerHTML = "Error " + oReq.status + " something went wrong.";
-          sendEvent("Error " + oReq.status);
-        }
-      };
-
-      oReq.send(oData);
-      ev.preventDefault();
-    }, false);
-  </script>
+  
   <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
